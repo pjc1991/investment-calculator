@@ -5,13 +5,9 @@ export default function BasicNumberInput({label, id, initialValue, onEdit}) {
 
     function handleChange(e) {
         setValue(e.target.value);
+        onEdit(id, e.target.value);
     }
 
-    function handleKeyUp(e) {
-        if (e.key === 'Enter') {
-            e.target.blur()
-        }
-    }
 
 
     return (
@@ -20,7 +16,7 @@ export default function BasicNumberInput({label, id, initialValue, onEdit}) {
                 {label}
             </label>
             <input id={id} type="number" className="col-span-2 bg-green-900 text-white p-2 rounded-lg border border-gray-300"
-                   value={value} onChange={handleChange} onBlur={() => onEdit(id, value)} onKeyUp={handleKeyUp}
+                   value={value} onChange={handleChange}
             />
         </>
     )
