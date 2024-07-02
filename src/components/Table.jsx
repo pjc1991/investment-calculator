@@ -1,5 +1,9 @@
 import InvestmentCalculator from '../utils/InvestmentCalculator'
 
+const formatter = new Intl.NumberFormat('ko-KR', {
+    maximumFractionDigits: 0,
+});
+
 export default function Table({params}) {
 
     const calculator = new InvestmentCalculator(params)
@@ -13,41 +17,41 @@ export default function Table({params}) {
     return (
         <table className="w-full text-white">
             <thead>
-            <tr className="text-green-400">
+            <tr className="text-green-400 text-right">
                 <th>
                     연차
                 </th>
                 <th>
-                    투자총액
+                    총액
                 </th>
                 <th>
-                    이자
+                    해당년도 이자
                 </th>
                 <th>
-                    총 이자
+                    누적 이자
                 </th>
                 <th>
-                    총 자본
+                    누적 자본
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody className="text-right">
             {tableData.map((row, index) => (
                 <tr key={index}>
                     <td>
-                        {row.year.toLocaleString('ko-KR')}년
+                        {row.year}년
                     </td>
                     <td>
-                        {row.totalInvestment.toLocaleString('ko-KR', {maximumFractionDigits: 0})}
+                        {formatter.format(row.totalInvestment)}원
                     </td>
                     <td>
-                        {row.interest.toLocaleString('ko-KR', {maximumFractionDigits: 0})}
+                        {formatter.format(row.interest)}원
                     </td>
                     <td>
-                        {row.totalInterest.toLocaleString('ko-KR', {maximumFractionDigits: 0})}
+                        {formatter.format(row.totalInterest)}원
                     </td>
                     <td>
-                        {row.totalCapital.toLocaleString('ko-KR', {maximumFractionDigits: 0})}
+                        {formatter.format(row.totalCapital)}원
                     </td>
                 </tr>
             ))}
